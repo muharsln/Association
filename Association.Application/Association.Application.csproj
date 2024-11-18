@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Association.Core\Association.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\DonationCategorties\Commands\Create\" />
+    <Folder Include="Features\DonationCategorties\Commands\Delete\" />
+    <Folder Include="Features\DonationCategorties\Commands\Update\" />
+    <Folder Include="Features\DonationCategorties\Queries\GetById\" />
+    <Folder Include="Features\DonationCategorties\Queries\GetList\" />
+    <Folder Include="Features\DonationForms\Commands\Create\" />
+    <Folder Include="Features\DonationForms\Commands\Delete\" />
+    <Folder Include="Features\DonationForms\Commands\Update\" />
+    <Folder Include="Features\DonationForms\Queries\GetById\" />
+    <Folder Include="Features\DonationForms\Queries\GetList\" />
+    <Folder Include="Features\DonationGroups\Commands\Create\" />
+    <Folder Include="Features\DonationGroups\Commands\Delete\" />
+    <Folder Include="Features\DonationGroups\Commands\Update\" />
+    <Folder Include="Features\DonationGroups\Queries\GetById\" />
+    <Folder Include="Features\DonationGroups\Queries\GetList\" />
+    <Folder Include="Features\DonationOptions\Commands\Create\" />
+    <Folder Include="Features\DonationOptions\Commands\Delete\" />
+    <Folder Include="Features\DonationOptions\Commands\Update\" />
+    <Folder Include="Features\DonationOptions\Queries\GetById\" />
+    <Folder Include="Features\DonationOptions\Queries\GetList\" />
+    <Folder Include="Features\DonationShares\Commands\Create\" />
+    <Folder Include="Features\DonationShares\Commands\Delete\" />
+    <Folder Include="Features\DonationShares\Commands\Update\" />
+    <Folder Include="Features\DonationShares\Queries\GetById\" />
+    <Folder Include="Features\DonationShares\Queries\GetList\" />
+    <Folder Include="Features\IntentionTypes\Commands\Create\" />
+    <Folder Include="Features\IntentionTypes\Commands\Delete\" />
+    <Folder Include="Features\IntentionTypes\Commands\Update\" />
+    <Folder Include="Features\IntentionTypes\Queries\GetById\" />
+    <Folder Include="Features\IntentionTypes\Queries\GetList\" />
+  </ItemGroup>
+
+</Project>
