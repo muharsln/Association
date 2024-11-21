@@ -40,6 +40,7 @@ public class DonorsController : ControllerBase
         GetByIdDonorDto donor = await _mediator.Send(query);
         return Ok(donor);
     }
+    
     [HttpPut("{id}")] // PUT: api/Donors/5
     public async Task<IActionResult> UpdateDonor(Guid id, [FromBody] UpdateDonorCommand command)
     {
@@ -47,7 +48,6 @@ public class DonorsController : ControllerBase
         UpdatedDonorResponse response = await _mediator.Send(command);
         return Ok(response);
     }
-
 
     [HttpDelete("{id}")] // DELETE: api/Donors/5
     public async Task<IActionResult> DeleteDonor(Guid id)

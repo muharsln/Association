@@ -22,6 +22,12 @@ public class IntentionTypeManager : IIntentionTypeService
         return addedIntentionType;
     }
 
+    public Task<bool> AnyAsync(Expression<Func<IntentionType, bool>> predicate)
+    {
+        var anyIntentionType = _intentionTypeRepository.AnyAsync(predicate);
+        return anyIntentionType;
+    }
+
     public async Task<IntentionType> DeleteAsync(IntentionType entity)
     {
         IntentionType deletedIntentionType = await _intentionTypeRepository.DeleteAsync(entity);

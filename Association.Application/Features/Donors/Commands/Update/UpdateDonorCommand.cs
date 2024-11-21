@@ -10,5 +10,4 @@ public class UpdateDonorCommand : IRequest<UpdatedDonorResponse>
     public string? Phone { get; set; }
     public string? Location { get; set; }
     public bool? IsActive { get; set; }
-
 }

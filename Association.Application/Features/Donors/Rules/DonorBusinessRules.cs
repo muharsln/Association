@@ -1,4 +1,5 @@
 ﻿using Association.Application.Common;
+using Association.Application.Services.DonationForms;
 using Association.Application.Services.Donors;
 using Association.Core.Entities;
 using Association.Core.Exceptions;
@@ -8,13 +9,15 @@ namespace Association.Application.Features.Donors.Rules;
 public class DonorBusinessRules : BaseBusinessRules
 {
     private readonly IDonorService _donorService;
+    private readonly IDonationFormService _donationFormService;
 
-    public DonorBusinessRules(IDonorService donorService)
+    public DonorBusinessRules(IDonorService donorService, IDonationFormService donationFormService)
     {
         _donorService = donorService;
+        _donationFormService = donationFormService;
     }
 
-    private async Task throwBusinessException(string erorCode, string message, string solution)
+    private Task throwBusinessException(string erorCode, string message, string solution)
     {
         throw new BusinessException(erorCode, message, solution);
     }
@@ -35,6 +38,15 @@ public class DonorBusinessRules : BaseBusinessRules
         if (!donorExists)
         {
             await throwBusinessException("DonorExists", "Bu bağışçı mevcut değildir.", "");
+        }
+    }
+
+    public async Task CheckIfDonorHasDonationForms(Donor donor)
+    {
+        var donorHasDonationForms = await _donationFormService.AnyAsync(predicate: d => d.DonorId == donor.Id);
+        if (donorHasDonationForms)
+        {
+            await throwBusinessException("DonorHasDonationForms", "Bu bağışçının bağış formu bulunmaktadır.", "Bağışçının bağış formlarını silmeden önce bağış formlarını siliniz.");
         }
     }
 }

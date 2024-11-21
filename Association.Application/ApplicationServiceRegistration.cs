@@ -30,10 +30,6 @@ public static class ApplicationServiceRegistration
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-
-        // TODO: Repository'ler burada register edilecek
-
-
         services.AddScoped<IDonationCategoryService, DonationCategoryManager>();
         services.AddScoped<IDonationFormService, DonationFormManager>();
         services.AddScoped<IDonationGroupService, DonationGroupManager>();

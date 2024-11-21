@@ -18,6 +18,12 @@ public class DonationShareManager : IDonationShareService
         return addedDonationShare;
     }
 
+    public Task<bool> AnyAsync(Expression<Func<DonationShare, bool>> predicate)
+    {
+        var result = _donationShareRepository.AnyAsync(predicate);
+        return result;
+    }
+
     public async Task<DonationShare> DeleteAsync(DonationShare entity)
     {
         DonationShare deletedDonationShare = await _donationShareRepository.DeleteAsync(entity);

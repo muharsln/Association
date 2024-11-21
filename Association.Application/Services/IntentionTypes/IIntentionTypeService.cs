@@ -14,6 +14,8 @@ public interface IIntentionTypeService
     Task<ICollection<IntentionType>> GetListAsync(
         Expression<Func<IntentionType, bool>>? predicate = null);
 
+    Task<bool> AnyAsync(Expression<Func<IntentionType, bool>> predicate);
+
     Task<IntentionType> AddAsync(IntentionType entity);
     Task<IntentionType> UpdateAsync(IntentionType entity);
     Task<IntentionType> DeleteAsync(IntentionType entity);

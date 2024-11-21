@@ -6,6 +6,6 @@ public class DeleteDonorCommandValidator : AbstractValidator<DeleteDonorCommand>
 {
     public DeleteDonorCommandValidator()
     {
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(d => d.Id).NotEmpty();
     }
 }

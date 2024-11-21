@@ -19,12 +19,12 @@ public class GetByIdDonorQueryHandler : IRequestHandler<GetByIdDonorQuery, GetBy
     }
     public async Task<GetByIdDonorDto> Handle(GetByIdDonorQuery request, CancellationToken cancellationToken)
     {
-        Donor donor = await _donorService.GetAsync(predicate: d => d.Id == request.Id);
+        var donor = _mapper.Map<Donor>(request);
 
         await _donorBusinessRules.CheckIfDonorExists(donor);
 
-        GetByIdDonorDto donorDto = _mapper.Map<GetByIdDonorDto>(donor);
+        donor = await _donorService.GetAsync(predicate: d => d.Id == request.Id);
 
-        return donorDto;
+        return _mapper.Map<GetByIdDonorDto>(donor);
     }
 }

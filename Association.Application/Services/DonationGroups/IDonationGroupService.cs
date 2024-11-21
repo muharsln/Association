@@ -11,6 +11,8 @@ public interface IDonationGroupService
     Task<DonationGroup> GetAsync(
     Expression<Func<DonationGroup, bool>> predicate);
 
+    Task<bool> AnyAsync(Expression<Func<DonationGroup, bool>> predicate);
+
     Task<ICollection<DonationGroup>> GetListAsync(
         Expression<Func<DonationGroup, bool>>? predicate = null);
 

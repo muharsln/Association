@@ -24,11 +24,10 @@ public class DeleteDonorCommandHandler : IRequestHandler<DeleteDonorCommand, Del
         Donor donor = _mapper.Map<Donor>(request);
 
         await _donorBusinessRules.CheckIfDonorExists(donor);
+        await _donorBusinessRules.CheckIfDonorHasDonationForms(donor);
 
-        // Delete the donor
         Donor deletedDonor = await _donorService.DeleteAsync(donor);
 
-        // Map the deleted donor to response
         DeletedDonorResponse response = _mapper.Map<DeletedDonorResponse>(donor);
         return response;
     }
