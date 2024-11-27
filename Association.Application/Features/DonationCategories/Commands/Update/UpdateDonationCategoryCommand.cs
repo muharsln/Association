@@ -1,10 +1,12 @@
 ﻿using MediatR;
 
 namespace Association.Application.Features.DonationCategories.Commands.Update;
-public class UpdateDonationCategoryCommand : IRequest<UpdatedDonationCategoryResponse>
+public record UpdateDonationCategoryCommand(
+    Guid Id,
+    Guid? DonationGroupId,
+    string? Name,
+    bool? IsActive
+) : IRequest<UpdatedDonationCategoryResponse>
 {
-    public Guid Id { get; set; }
-    public Guid? DonationGroupId { get; set; }
-    public string? Name { get; set; }
-    public bool? IsActive { get; set; }
+    public Guid Id { get; set; } = Id;
 }

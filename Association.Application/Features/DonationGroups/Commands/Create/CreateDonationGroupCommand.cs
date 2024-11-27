@@ -1,20 +1,7 @@
 ﻿using MediatR;
 
 namespace Association.Application.Features.DonationGroups.Commands.Create;
-public class CreateDonationGroupCommand : IRequest<CreatedDonationGroupResponse>
+public record CreateDonationGroupCommand(string Name, bool IsActive) : IRequest<CreatedDonationGroupResponse>
 {
-    public string Name { get; set; }
-    public bool IsActive { get; set; }
-
-    public CreateDonationGroupCommand()
-    {
-        Name = string.Empty;
-        IsActive = true;
-    }
-
-    public CreateDonationGroupCommand(string name, bool isActive)
-    {
-        Name = name;
-        IsActive = isActive;
-    }
+    public CreateDonationGroupCommand() : this(string.Empty, true) { }
 }

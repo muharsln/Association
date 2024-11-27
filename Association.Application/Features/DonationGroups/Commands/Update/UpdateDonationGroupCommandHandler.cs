@@ -4,32 +4,20 @@ using AutoMapper;
 using MediatR;
 
 namespace Association.Application.Features.DonationGroups.Commands.Update;
-
-public class UpdateDonationGroupCommandHandler : IRequestHandler<UpdateDonationGroupCommand, UpdatedDonationGroupResponse>
+public class UpdateDonationGroupCommandHandler(IDonationGroupService donationGroupService, IMapper mapper, DonationGroupBusinessRules donationGroupBusinessRules) : IRequestHandler<UpdateDonationGroupCommand, UpdatedDonationGroupResponse>
 {
-    private readonly IDonationGroupService _donationGroupService;
-    private readonly IMapper _mapper;
-    private readonly DonationGroupBusinessRules _donationGroupBusinessRules;
-
-    public UpdateDonationGroupCommandHandler(IDonationGroupService donationGroupService, IMapper mapper, DonationGroupBusinessRules donationGroupBusinessRules)
-    {
-        _donationGroupService = donationGroupService;
-        _mapper = mapper;
-        _donationGroupBusinessRules = donationGroupBusinessRules;
-    }
-
     public async Task<UpdatedDonationGroupResponse> Handle(UpdateDonationGroupCommand request, CancellationToken cancellationToken)
     {
-        var donationGroup = await _donationGroupService.GetAsync(d => d.Id == request.Id);
+        var donationGroup = await donationGroupService.GetAsync(d => d.Id == request.Id);
 
-        _mapper.Map(request, donationGroup);
+        mapper.Map(request, donationGroup);
 
-        await _donationGroupBusinessRules.CheckIfDonationGroupIdExists(donationGroup);
-        await _donationGroupBusinessRules.CheckIfDonationGroupNameExists(donationGroup);
+        await donationGroupBusinessRules.CheckIfDonationGroupIdExistsAsync(donationGroup);
+        await donationGroupBusinessRules.CheckIfDonationGroupNameExistsAsync(donationGroup);
 
-        await _donationGroupService.UpdateAsync(donationGroup);
+        await donationGroupService.UpdateAsync(donationGroup);
 
-        UpdatedDonationGroupResponse response = _mapper.Map<UpdatedDonationGroupResponse>(donationGroup);
+        UpdatedDonationGroupResponse response = mapper.Map<UpdatedDonationGroupResponse>(donationGroup);
         return response;
     }
 }

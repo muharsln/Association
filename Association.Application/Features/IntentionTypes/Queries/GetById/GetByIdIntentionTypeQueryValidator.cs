@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 
 namespace Association.Application.Features.IntentionTypes.Queries.GetById;
-
 public class GetByIdIntentionTypeQueryValidator : AbstractValidator<GetByIdIntentionTypeQuery>
 {
     public GetByIdIntentionTypeQueryValidator()

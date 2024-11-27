@@ -1,8 +1,7 @@
 ﻿using MediatR;
 
 namespace Association.Application.Features.DonationGroups.Queries.GetById;
-
-public class GetByIdDonationGroupQuery(Guid id) : IRequest<GetByIdDonationGroupDto>
+public record GetByIdDonationGroupQuery(Guid Id) : IRequest<GetByIdDonationGroupDto>
 {
-    public Guid Id { get; } = id;
+    public Guid Id { get; init; } = Id;
 }

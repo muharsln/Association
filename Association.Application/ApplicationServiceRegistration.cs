@@ -18,7 +18,6 @@ public static class ApplicationServiceRegistration
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -43,7 +42,6 @@ public static class ApplicationServiceRegistration
         return services;
     }
 
-
     public static IServiceCollection AddSubClassesOfType(
         this IServiceCollection services,
         Assembly assembly,
@@ -59,5 +57,4 @@ public static class ApplicationServiceRegistration
                 addWithLifeCycle(services, type);
         return services;
     }
-
 }

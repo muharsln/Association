@@ -5,30 +5,18 @@ using AutoMapper;
 using MediatR;
 
 namespace Association.Application.Features.DonationCategories.Commands.Delete;
-
-public class DeleteDonationCategoryCommandHandler : IRequestHandler<DeleteDonationCategoryCommand, DeletedDonationCategoryResponse>
+public class DeleteDonationCategoryCommandHandler(IDonationCategoryService donationCategoryService, IMapper mapper, DonationCategoryBusinessRules donationCategoryBusinessRules) : IRequestHandler<DeleteDonationCategoryCommand, DeletedDonationCategoryResponse>
 {
-    private readonly IDonationCategoryService _donationCategoryService;
-    private readonly IMapper _mapper;
-    private readonly DonationCategoryBusinessRules _donationCategoryBusinessRules;
-
-    public DeleteDonationCategoryCommandHandler(IDonationCategoryService donationCategoryService, IMapper mapper, DonationCategoryBusinessRules donationCategoryBusinessRules)
-    {
-        _donationCategoryService = donationCategoryService;
-        _mapper = mapper;
-        _donationCategoryBusinessRules = donationCategoryBusinessRules;
-    }
-
     public async Task<DeletedDonationCategoryResponse> Handle(DeleteDonationCategoryCommand request, CancellationToken cancellationToken)
     {
-        var donationCategory = _mapper.Map<DonationCategory>(request);
+        var donationCategory = mapper.Map<DonationCategory>(request);
 
-        await _donationCategoryBusinessRules.CheckIfIdExists(donationCategory);
-        await _donationCategoryBusinessRules.CheckIfDonationCategoryHasDonationForms(donationCategory);
-        await _donationCategoryBusinessRules.CheckIfDonationCategoryHasDonationOptions(donationCategory);
+        await donationCategoryBusinessRules.CheckIfIdExistsAsync(donationCategory);
+        await donationCategoryBusinessRules.CheckIfDonationCategoryHasDonationFormsAsync(donationCategory);
+        await donationCategoryBusinessRules.CheckIfDonationCategoryHasDonationOptionsAsync(donationCategory);
 
-        await _donationCategoryService.DeleteAsync(donationCategory);
+        await donationCategoryService.DeleteAsync(donationCategory);
 
-        return _mapper.Map<DeletedDonationCategoryResponse>(donationCategory);
+        return mapper.Map<DeletedDonationCategoryResponse>(donationCategory);
     }
 }

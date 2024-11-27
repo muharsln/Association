@@ -1,9 +1,11 @@
 ﻿using MediatR;
 
 namespace Association.Application.Features.IntentionTypes.Commands.Update;
-public class UpdateIntentionTypeCommand : IRequest<UpdatedIntentionTypeResponse>
+public record UpdateIntentionTypeCommand(
+    Guid Id,
+    string? Name,
+    bool? IsActive
+) : IRequest<UpdatedIntentionTypeResponse>
 {
-    public Guid Id { get; set; }
-    public string? Name { get; set; }
-    public bool? IsActive { get; set; }
-}
+    public Guid Id { get; set; } = Id;
+};

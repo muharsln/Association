@@ -2,50 +2,35 @@
 using Association.Application.Services.DonationCategories;
 using Association.Application.Services.DonationGroups;
 using Association.Core.Entities;
-using Association.Core.Exceptions;
 
 namespace Association.Application.Features.DonationGroups.Rules;
 
-public class DonationGroupBusinessRules : BaseBusinessRules
+public class DonationGroupBusinessRules(IDonationGroupService donationGroupService, IDonationCategoryService donationCategoryService) : BaseBusinessRules
 {
-    private readonly IDonationGroupService _donationGroupService;
-    private readonly IDonationCategoryService _donationCategoryService;
-
-    public DonationGroupBusinessRules(IDonationGroupService donationGroupService, IDonationCategoryService donationCategoryService)
+    public async Task CheckIfDonationGroupNameExistsAsync(DonationGroup donationGroup)
     {
-        _donationGroupService = donationGroupService;
-        _donationCategoryService = donationCategoryService;
-    }
-
-    private Task throwBusinessException(string erorCode, string message, string solution)
-    {
-        throw new BusinessException(erorCode, message, solution);
-    }
-
-    public async Task CheckIfDonationGroupNameExists(DonationGroup donationGroup)
-    {
-        var existingDonationGroup = await _donationGroupService.AnyAsync(predicate: d => d.Name == donationGroup.Name);
+        var existingDonationGroup = await donationGroupService.AnyAsync(predicate: d => d.Name == donationGroup.Name);
         if (existingDonationGroup)
         {
-            await throwBusinessException("DonationGroupExists", "Bağış grubu zaten mevcut", "Lütfen farklı bir isim verin");
+            await ThrowBusinessException("Bağış grubu zaten mevcut", "Lütfen farklı bir isim verin");
         }
     }
 
-    public async Task CheckIfDonationGroupIdExists(DonationGroup donationGroup)
+    public async Task CheckIfDonationGroupIdExistsAsync(DonationGroup donationGroup)
     {
-        var donationGroupExists = await _donationGroupService.AnyAsync(predicate: d => d.Id == donationGroup.Id);
+        var donationGroupExists = await donationGroupService.AnyAsync(predicate: d => d.Id == donationGroup.Id);
         if (!donationGroupExists)
         {
-            await throwBusinessException("DonationGroupNotFound", "Bağış grubu bulunamadı", "Lütfen geçerli bir bağış grubu seçin");
+            await ThrowBusinessException("Bağış grubu bulunamadı", "Lütfen geçerli bir bağış grubu seçin");
         }
     }
-    public async Task CheckIfDonationGroupHasDonationCategories(DonationGroup donationGroup)
+    public async Task CheckIfDonationGroupHasDonationCategoriesAsync(DonationGroup donationGroup)
     {
-        var donationCategoriesExist = await _donationCategoryService.AnyAsync(predicate: d => d.DonationGroupId == donationGroup.Id);
+        var donationCategoriesExist = await donationCategoryService.AnyAsync(predicate: d => d.DonationGroupId == donationGroup.Id);
 
         if (donationCategoriesExist)
         {
-            await throwBusinessException("DonationCategoriesExist", "Bağış grubuna ait kategori bulunmaktadır", "Bağış grubunu silmek için önce kategorileri silin");
+            await ThrowBusinessException("Bağış grubuna ait kategori bulunmaktadır", "Bağış grubunu silmek için önce kategorileri silin");
         }
     }
 }

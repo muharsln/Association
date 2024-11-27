@@ -1,7 +1,7 @@
 ﻿using MediatR;
 
 namespace Association.Application.Features.DonationGroups.Commands.Delete;
-public class DeleteDonationGroupCommand(Guid id) : IRequest<DeletedDonationGroupResponse>
+public record DeleteDonationGroupCommand(Guid Id) : IRequest<DeletedDonationGroupResponse>
 {
-    public Guid Id { get; set; } = id;
+    public Guid Id { get; init; } = Id;
 }

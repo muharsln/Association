@@ -1,6 +1,2 @@
 ﻿namespace Association.Application.Features.DonationCategories.Commands.Delete;
-
-public class DeletedDonationCategoryResponse
-{
-    public Guid Id { get; set; }
-}
+public record DeletedDonationCategoryResponse(Guid Id);

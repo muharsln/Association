@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Association.Core\Association.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EntityConfigurations\" />
-  </ItemGroup>
-
 </Project>

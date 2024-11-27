@@ -3,21 +3,11 @@ using AutoMapper;
 using MediatR;
 
 namespace Association.Application.Features.DonationCategories.Queries.GetList;
-
-public class GetListDonationCategoryQueryHandler : IRequestHandler<GetListDonationCategoryQuery, ICollection<GetListDonationCategoryDto>>
+public class GetListDonationCategoryQueryHandler(IDonationCategoryService donationCategoryService, IMapper mapper) : IRequestHandler<GetListDonationCategoryQuery, ICollection<GetListDonationCategoryDto>>
 {
-    private readonly IDonationCategoryService _donationCategoryService;
-    private readonly IMapper _mapper;
-
-    public GetListDonationCategoryQueryHandler(IDonationCategoryService donationCategoryService, IMapper mapper)
-    {
-        _donationCategoryService = donationCategoryService;
-        _mapper = mapper;
-    }
-
     public async Task<ICollection<GetListDonationCategoryDto>> Handle(GetListDonationCategoryQuery request, CancellationToken cancellationToken)
     {
-        var donationCategories = await _donationCategoryService.GetListAsync();
-        return _mapper.Map<ICollection<GetListDonationCategoryDto>>(donationCategories);
+        var donationCategories = await donationCategoryService.GetListAsync();
+        return mapper.Map<ICollection<GetListDonationCategoryDto>>(donationCategories);
     }
 }

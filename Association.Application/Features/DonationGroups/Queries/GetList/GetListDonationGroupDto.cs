@@ -2,4 +2,5 @@
 public record GetListDonationGroupDto(
     Guid Id,
     string Name,
-    bool IsActive);
+    bool IsActive
+);

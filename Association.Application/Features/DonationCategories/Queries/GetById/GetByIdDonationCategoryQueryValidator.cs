@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 
 namespace Association.Application.Features.DonationCategories.Queries.GetById;
-
 public class GetByIdDonationCategoryQueryValidator : AbstractValidator<GetByIdDonationCategoryQuery>
 {
     public GetByIdDonationCategoryQueryValidator()

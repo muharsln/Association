@@ -4,8 +4,4 @@ using Association.Persistence.Context;
 using Association.Persistence.Repositories.Common;
 
 namespace Association.Persistence.Repositories;
-
-public class IntentionTypeRepository : EfRepositoryBase<IntentionType, Guid, AppDbContext>, IIntentionTypeRepository
-{
-    public IntentionTypeRepository(AppDbContext context) : base(context) { }
-}
+public class IntentionTypeRepository(AssociationDbContext context) : EfRepositoryBase<IntentionType, Guid, AssociationDbContext>(context), IIntentionTypeRepository { }

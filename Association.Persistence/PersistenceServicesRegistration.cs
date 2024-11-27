@@ -6,15 +6,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Association.Persistence;
-
 public static class PersistenceServicesRegistration
 {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<AppDbContext>(options =>
+        services.AddDbContext<AssociationDbContext>(options =>
         {
-            //options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-            options.UseInMemoryDatabase("DonationTestDb");
+            options.UseSqlServer(configuration.GetSection("MsSqlConfiguration:ConnectionString").Value);
+            //options.UseInMemoryDatabase("DonationTestDb");
         });
 
         services.AddScoped<IDonorRepository, DonorRepository>();

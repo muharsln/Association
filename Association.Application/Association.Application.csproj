@@ -19,16 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\DonationForms\Commands\Create\" />
-    <Folder Include="Features\DonationForms\Commands\Delete\" />
-    <Folder Include="Features\DonationForms\Commands\Update\" />
-    <Folder Include="Features\DonationForms\Queries\GetById\" />
-    <Folder Include="Features\DonationForms\Queries\GetList\" />
-    <Folder Include="Features\DonationOptions\Commands\Create\" />
-    <Folder Include="Features\DonationOptions\Commands\Delete\" />
-    <Folder Include="Features\DonationOptions\Commands\Update\" />
-    <Folder Include="Features\DonationOptions\Queries\GetById\" />
-    <Folder Include="Features\DonationOptions\Queries\GetList\" />
     <Folder Include="Features\DonationShares\Commands\Create\" />
     <Folder Include="Features\DonationShares\Commands\Delete\" />
     <Folder Include="Features\DonationShares\Commands\Update\" />

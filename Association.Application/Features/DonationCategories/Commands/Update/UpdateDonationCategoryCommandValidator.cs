@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 
 namespace Association.Application.Features.DonationCategories.Commands.Update;
-
 public class UpdateDonationCategoryCommandValidator : AbstractValidator<UpdateDonationCategoryCommand>
 {
     public UpdateDonationCategoryCommandValidator()

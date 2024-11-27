@@ -5,28 +5,16 @@ using AutoMapper;
 using MediatR;
 
 namespace Association.Application.Features.DonationGroups.Queries.GetById;
-
-public class GetByIdDonationGroupQueryHandler : IRequestHandler<GetByIdDonationGroupQuery, GetByIdDonationGroupDto>
+public class GetByIdDonationGroupQueryHandler(IMapper mapper, IDonationGroupService donationGroupService, DonationGroupBusinessRules donationGroupBusinessRules) : IRequestHandler<GetByIdDonationGroupQuery, GetByIdDonationGroupDto>
 {
-    private readonly IMapper _mapper;
-    private readonly IDonationGroupService _donationGroupService;
-    private readonly DonationGroupBusinessRules _donationGroupBusinessRules;
-
-    public GetByIdDonationGroupQueryHandler(IMapper mapper, IDonationGroupService donationGroupService, DonationGroupBusinessRules donationGroupBusinessRules)
-    {
-        _mapper = mapper;
-        _donationGroupService = donationGroupService;
-        _donationGroupBusinessRules = donationGroupBusinessRules;
-    }
-
     public async Task<GetByIdDonationGroupDto> Handle(GetByIdDonationGroupQuery request, CancellationToken cancellationToken)
     {
-        var donationGroup = _mapper.Map<DonationGroup>(request);
+        var donationGroup = mapper.Map<DonationGroup>(request);
 
-        await _donationGroupBusinessRules.CheckIfDonationGroupIdExists(donationGroup);
+        await donationGroupBusinessRules.CheckIfDonationGroupIdExistsAsync(donationGroup);
 
-        donationGroup = await _donationGroupService.GetAsync(predicate: d => d.Id == request.Id);
+        donationGroup = await donationGroupService.GetAsync(predicate: d => d.Id == request.Id);
 
-        return _mapper.Map<GetByIdDonationGroupDto>(donationGroup);
+        return mapper.Map<GetByIdDonationGroupDto>(donationGroup);
     }
 }
