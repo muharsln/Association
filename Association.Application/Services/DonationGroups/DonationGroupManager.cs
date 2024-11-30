@@ -22,6 +22,12 @@ public class DonationGroupManager : IDonationGroupService
         return addedDonationGroup;
     }
 
+    public async Task<bool> AnyAsync(Expression<Func<DonationGroup, bool>> predicate)
+    {
+        var result = await _donationGroupRepository.AnyAsync(predicate);
+        return result;
+    }
+
     public async Task<DonationGroup> DeleteAsync(DonationGroup entity)
     {
         DonationGroup deletedDonationGroup = await _donationGroupRepository.DeleteAsync(entity);

@@ -14,6 +14,8 @@ public interface IDonationCategoryService
     Task<ICollection<DonationCategory>> GetListAsync(
         Expression<Func<DonationCategory, bool>>? predicate = null);
 
+    Task<bool> AnyAsync(Expression<Func<DonationCategory, bool>> predicate);
+
     Task<DonationCategory> AddAsync(DonationCategory entity);
     Task<DonationCategory> UpdateAsync(DonationCategory entity);
     Task<DonationCategory> DeleteAsync(DonationCategory entity);

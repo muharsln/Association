@@ -19,6 +19,12 @@ public class DonationCategoryManager : IDonationCategoryService
         return addedDonationCategory;
     }
 
+    public Task<bool> AnyAsync(Expression<Func<DonationCategory, bool>> predicate)
+    {
+        var result = _donationCategoryRepository.AnyAsync(predicate);
+        return result;
+    }
+
     public async Task<DonationCategory> DeleteAsync(DonationCategory entity)
     {
         DonationCategory deletedDonationCategory = await _donationCategoryRepository.DeleteAsync(entity);

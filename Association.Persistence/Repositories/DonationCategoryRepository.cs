@@ -4,8 +4,4 @@ using Association.Persistence.Context;
 using Association.Persistence.Repositories.Common;
 
 namespace Association.Persistence.Repositories;
-
-public class DonationCategoryRepository : EfRepositoryBase<DonationCategory, Guid, AppDbContext>, IDonationCategoryRepository
-{
-    public DonationCategoryRepository(AppDbContext context) : base(context) { }
-}
+public class DonationCategoryRepository(AssociationDbContext context) : EfRepositoryBase<DonationCategory, Guid, AssociationDbContext>(context), IDonationCategoryRepository { }

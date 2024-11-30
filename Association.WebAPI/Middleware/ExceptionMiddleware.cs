@@ -2,8 +2,6 @@
 using Newtonsoft.Json;
 
 namespace Association.WebAPI.Middleware;
-
-
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
@@ -23,7 +21,7 @@ public class ExceptionMiddleware
         {
             await HandleExceptionAsync(context, ex);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             await HandleExceptionAsync(context, new ApiException("SERVER_ERROR", "An unexpected error occurred.", null));
         }

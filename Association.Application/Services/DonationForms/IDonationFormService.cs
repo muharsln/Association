@@ -15,6 +15,8 @@ public interface IDonationFormService
     Task<ICollection<DonationForm>> GetListAsync(
         Expression<Func<DonationForm, bool>>? predicate = null);
 
+    Task<bool> AnyAsync(Expression<Func<DonationForm, bool>> predicate);
+
     Task<DonationForm> AddAsync(DonationForm entity);
     Task<DonationForm> UpdateAsync(DonationForm entity);
     Task<DonationForm> DeleteAsync(DonationForm entity);

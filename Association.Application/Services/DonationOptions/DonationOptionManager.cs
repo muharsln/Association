@@ -22,6 +22,12 @@ public class DonationOptionManager : IDonationOptionService
         return addedDonationOption;
     }
 
+    public Task<bool> AnyAsync(Expression<Func<DonationOption, bool>> predicate)
+    {
+        var result = _donationOptionRepository.AnyAsync(predicate);
+        return result;
+    }
+
     public async Task<DonationOption> DeleteAsync(DonationOption entity)
     {
         DonationOption deletedDonationOption = await _donationOptionRepository.DeleteAsync(entity);

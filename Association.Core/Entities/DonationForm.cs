@@ -9,9 +9,8 @@ public class DonationForm : BaseEntity<Guid>
     public decimal TotalPrice { get; set; }
     public DateTime CreateDate { get; set; }
 
-    public DonationCategory DonationCategory { get; set; }
     public Donor Donor { get; set; }
+    public DonationCategory DonationCategory { get; set; }
 
     public virtual ICollection<DonationShare> DonationShares { get; set; }
-
 }
