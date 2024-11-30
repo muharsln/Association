@@ -5,4 +5,3 @@ public abstract class BaseBusinessRules
 {
     protected Task ThrowBusinessException(string message, string solution) => throw new BusinessException(message, solution);
 }
-

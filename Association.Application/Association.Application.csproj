@@ -18,12 +18,4 @@
     <ProjectReference Include="..\Association.Core\Association.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\DonationShares\Commands\Create\" />
-    <Folder Include="Features\DonationShares\Commands\Delete\" />
-    <Folder Include="Features\DonationShares\Commands\Update\" />
-    <Folder Include="Features\DonationShares\Queries\GetById\" />
-    <Folder Include="Features\DonationShares\Queries\GetList\" />
-  </ItemGroup>
-
 </Project>
